@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const FormBuilder = () => {
   const [fields, setFields] = useState([]);
-  const { register, handleSubmit, setValue, watch, getValues } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: { fields: [] },
   });
@@ -20,7 +20,6 @@ const FormBuilder = () => {
     reorderedFields.splice(destination.index, 0, movedItem);
 
     setFields(reorderedFields);
-    setValue("fields", reorderedFields); // Update form state
   };
 
   const addField = (type, label) => {
@@ -31,7 +30,6 @@ const FormBuilder = () => {
       value: "",
     };
     setFields([...fields, newField]);
-    setValue("fields", [...fields, newField]); // Sync with form state
   };
 
   const onSubmit = (data) => {
